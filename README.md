@@ -3,6 +3,10 @@ enumerate a large amount of rdkit valid SMILES.
 
 Sometime, the doRandom=True flag of Chem.MolToSmiles in rdkit just doesn't cut it. For example, the topical nasal decongestant `c1ccccc1CC(C)NC` has merely 40 unique random SMILES. Making use of the "use ring operators as normal bonds" trick, we can do better than that and generate a large amount of ugly but rdkit-valid SMILES! Because using this trick makes it possible to use any atom ordering, this means a total of `N!` SMILES of this type are possible, with `N` the amount of atoms and `!` the factorial (I'm not shouting, I'm calm). In case there's symmetry the number will be a bit lower. 
 
+## reqs
+
+should work in any python env with reasonably up to date rdkit.
+
 ## usage
 `python ultra_enumerate.py --smiles "c1ccccc1CC(C)NC" -o output.smi -N 100000`
 
