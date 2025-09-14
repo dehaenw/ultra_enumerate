@@ -26,7 +26,7 @@ c:1:23.c:4:5.c:6:7.c:7:2.c:4:1.C8.c:5:6.C39.N%10%11.C%11.C98%10
 c:1:23.N45.c:6:7.C894.c:7:2.c:%10:%11.C5.C38.c:%10:1.c:%11:6.C9
 ```
 
-The speed is relatively practical, for example the output 100000 nasal decongestant random SMILES take about 2 minutes to generate.
+The speed is relatively practical, for example the output 100000 nasal decongestant random SMILES take about 2 seconds to generate.
 
 ## limitations
 For the moment stereochemistry is ignored.
