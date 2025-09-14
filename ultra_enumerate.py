@@ -6,43 +6,13 @@ from math import factorial
 import argparse
 import csv
 
-
-
+float2bond = {1:"",1.5:":",2:"=",3:"#"}
 
 def get_tokens(mol):
-    tokens = []
-    for atom in mol.GetAtoms():
-        sym = atom.GetSymbol()
-        token = sym
-        if atom.GetIsAromatic():
-            token = token.lower()
-        hs = atom.GetTotalNumHs()
-        iso = atom.GetIsotope()
-        cha = atom.GetFormalCharge()
-        if cha or iso or token=="n":
-            if hs:
-                token += "H"
-                if hs>1:
-                    token += str(hs)
-        if iso:
-            token = str(iso)+token
-        if cha:
-            if cha>0:
-                token += "+"
-                if cha>1:
-                    token += str(cha)
-            if cha<0:
-                token += "-"
-                if cha>1:
-                    token += str(-cha)
-        if cha or iso or sym not in ["B","C","N","O","F","Cl","Br","I"]:
-            token = f'[{token}]'
-        elif token=="nH":
-            token = f'[{token}]'
-        tokens.append(token)
+    Chem.RemoveStereochemistry(mol)
+    tokens = [Chem.MolFragmentToSmiles(mol, atomsToUse=[i]) for i in range(mol.GetNumAtoms())] 
     return tokens
-    
-float2bond = {1:"",1.5:":",2:"=",3:"#"}
+
 
 def get_bonds(m):
     bondtypes = {}
@@ -93,8 +63,7 @@ def remap_mol(mappings, mol):
             smi = smi.replace(k,final_tokens[k])
         smis.append(smi)
     return smis
-    
-import argparse
+
 
 def main():
     parser = argparse.ArgumentParser(
@@ -149,4 +118,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
